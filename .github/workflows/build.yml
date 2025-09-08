@@ -167,19 +167,25 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Run in NetBSD
-        uses: vmactions/netbsd-vm@v1
+        uses: cross-platform-actions/action@v0.29.0
         with:
-          release: "10.1"
-          usesh: true
-          prepare: |
-            /usr/sbin/pkg_add cmake googletest
-
+          operating_system: netbsd
+          version: '10.1'
           run: |
+            set -x
             echo '#### System information'
+            uname -a
+            echo "$SHELL"
+            pwd
+            ls -la
             whoami
-            env
+            env | sort
             c++ --version
             gcc --version
+
+            sudo pkgin update
+            sudo pkgin -y install cmake
+            sudo pkgin -y install googletest
 
             echo '#### Building'
             .build/build -DCMAKE_CXX_STANDARD=11 -DCMAKE_CXX_STANDARD_REQUIRED=ON -DCMAKE_CXX_EXTENSIONS=OFF
