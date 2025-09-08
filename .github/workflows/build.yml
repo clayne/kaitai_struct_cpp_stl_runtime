@@ -17,7 +17,7 @@ jobs:
           - '11'
           - '20'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install GoogleTest
         env:
           CPP_STANDARD: ${{ matrix.cpp-standard }}
@@ -49,7 +49,7 @@ jobs:
           - '11'
           - '20'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install GoogleTest
         env:
           CPP_STANDARD: ${{ matrix.cpp-standard }}
@@ -78,7 +78,7 @@ jobs:
   # This one is challenging:
   #
   # * It's impossible to run git clone inside this container (as old git will use ancient protocols not supported anymore
-  #   by GitHub, and also standard `actions/checkout@v4` will depend on Node.js/npm, which are not available in this container).
+  #   by GitHub, and also standard `actions/checkout@v5` will depend on Node.js/npm, which are not available in this container).
   #   To work around this, we start/stop container manually and use targeted execution of specific build/run commands only
   #   inside the container, keeping git and networking stuff out.
   #
@@ -93,7 +93,7 @@ jobs:
   linux_ubuntu_7_10:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: docker pull
         run: |
           docker pull icomputer7/ancient-ubuntu-docker:gutsy
@@ -118,7 +118,7 @@ jobs:
     runs-on: windows-latest
     # NB: see https://github.com/actions/runner-images/blob/main/images/windows/Windows2022-Readme.md for what's available in this image
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: restore
         run: |
           C:\vcpkg\bootstrap-vcpkg.bat
@@ -132,7 +132,7 @@ jobs:
   freebsd_14_2:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Run in FreeBSD
         uses: vmactions/freebsd-vm@v1
         with:
@@ -165,7 +165,7 @@ jobs:
     # c++ (nb3 20231008) 10.5.0
     # Copyright (C) 2020 Free Software Foundation, Inc.
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Run in NetBSD
         uses: vmactions/netbsd-vm@v1
         with:
