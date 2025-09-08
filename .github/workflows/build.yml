@@ -129,7 +129,7 @@ jobs:
             -DCMAKE_CXX_STANDARD=11 -DCMAKE_CXX_STANDARD_REQUIRED=ON -DCMAKE_CXX_EXTENSIONS=OFF
       - name: unittest
         run: .build\run-unittest.ps1
-  freebsd_14_2:
+  freebsd:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -159,7 +159,7 @@ jobs:
 
             echo '#### Testing'
             .build/run-unittest
-  netbsd_10_1:
+  netbsd:
     runs-on: ubuntu-latest
     # Doesn't use clang, has gcc:
     # c++ (nb3 20231008) 10.5.0
